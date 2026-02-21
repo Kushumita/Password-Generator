@@ -176,3 +176,41 @@ body::after{
         padding: 25px;
     }
 }
+.copyMsg{
+    position: absolute;
+    top: -30px;
+    right: 0;
+    background: #00f5ff;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.copyMsg.show{
+    opacity: 1;
+    transform: translateY(0);
+}
+.subtitle{
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: rgba(255,255,255,0.7);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+.lengthSubtitle{
+    text-align: center;
+    font-size: 14px;
+    margin-top: 8px;
+    margin-bottom: 18px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.5px;
+}
+

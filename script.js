@@ -49,15 +49,21 @@ function generatePassword(){
     return genPassword;
 }
 
-copyIcon.addEventListener('click', ()=>{
-    if(passBox.value != "" || passBox.value.length >=1){
-        navigator.clipboard.writeText(passBox.value);
-        copyIcon.innerText = "check";
-        copyIcon.title = "Password Copied";
 
-        setTimeout(()=>{
-            copyIcon.innerHTML = "content_copy";
-            copyIcon.title = "";
-        }, 3000)
+const copyMsg = document.getElementById("copyMsg");
+
+copyIcon.addEventListener("click", () => {
+    if (passBox.value !== "") {
+        
+        // Copy to clipboard
+        navigator.clipboard.writeText(passBox.value);
+
+        // Show message
+        copyMsg.classList.add("show");
+
+        // Hide after 2 seconds
+        setTimeout(() => {
+            copyMsg.classList.remove("show");
+        }, 2000);
     }
 });
