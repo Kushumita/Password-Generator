@@ -7,17 +7,17 @@ let numbers = document.getElementById("numbers");
 let symbols = document.getElementById("symbols");
 let genBtn = document.getElementById("genBtn");
 let copyIcon = document.getElementById("copyIcon");
+let strengthLevel = document.getElementById("strengthLevel");
 
-
-// Showing input slider value 
+updateSlider();   
 sliderValue.textContent = inputSlider.value;
-inputSlider.addEventListener('input', ()=>{
-    sliderValue.textContent = inputSlider.value;
-});
+inputSlider.addEventListener("input", updateSlider);
 
 genBtn.addEventListener('click', ()=>{
-    passBox.value = generatePassword();
-})
+    let password = generatePassword();
+    passBox.value = password;
+    updateStrength(password);
+});
 
 let lowerChars = "abcdefghijklmnopqrstuvwxyz";
 let upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -49,6 +49,55 @@ function generatePassword(){
     return genPassword;
 }
 
+function updateSlider() {
+
+    let min = inputSlider.min;
+    let max = inputSlider.max;
+    let val = inputSlider.value;
+
+    let percentage = ((val - min) / (max - min)) * 100;
+
+    inputSlider.style.background =
+        `linear-gradient(to right, #ffffff ${percentage}%, rgba(255,255,255,0.3) ${percentage}%)`;
+
+    sliderValue.textContent = val;
+}
+
+function updateStrength(password) {
+
+    let strength = 0;
+
+    if (password.length >= 8) strength++;
+    if (password.length >= 12) strength++;
+    if (/[A-Z]/.test(password)) strength++;
+    if (/[0-9]/.test(password)) strength++;
+    if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+    // Set width & color
+    switch(strength) {
+        case 0:
+        case 1:
+            strengthLevel.style.width = "20%";
+            strengthLevel.style.background = "red";
+            break;
+        case 2:
+            strengthLevel.style.width = "40%";
+            strengthLevel.style.background = "orange";
+            break;
+        case 3:
+            strengthLevel.style.width = "60%";
+            strengthLevel.style.background = "yellow";
+            break;
+        case 4:
+            strengthLevel.style.width = "80%";
+            strengthLevel.style.background = "limegreen";
+            break;
+        case 5:
+            strengthLevel.style.width = "100%";
+            strengthLevel.style.background = "green";
+            break;
+    }
+}
 
 const copyMsg = document.getElementById("copyMsg");
 
